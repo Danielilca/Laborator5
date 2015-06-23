@@ -13,6 +13,8 @@ public class Notepad {
 
 
         DoLogin dologin = new DoLogin();
+        dologin.readLoginList();
+
         // daca searchul e ok apel altfel stai aici
 
         boolean isLogin = dologin.loginUntilSuccess();

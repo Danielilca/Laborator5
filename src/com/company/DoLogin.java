@@ -1,31 +1,37 @@
 package com.company;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * Created by Mihai on 6/13/2015.
  */
 public class DoLogin {
-
-
-    Login[] loginList = new Login[3];
+    ArrayList<Login> loginlist=new ArrayList<Login>();
 
     DoLogin() {
-        Login l1 = new Login("i", "p");
-        Login l2 = new Login("v", "v");
-        Login l3 = new Login("a", "a");
 
-        loginList[0] = l1;
-        loginList[1] = l2;
-        loginList[2] = l3;
-    }
+            }
 
+ public  void readLoginList(){
+     try{
+     BufferedReader bReader = new BufferedReader(new FileReader("text.txt"));
+     String line=null;
+     while((line= bReader.readLine())!=null)
+     {
+         String[] userandpass=line.split("\\;");
+         String user=userandpass[0];
+         String password=userandpass[1];
+         loginlist.add(new Login(user,password));
+         }} catch (IOException e) {
+         System.out.println(e.getMessage()+"the file not found");
+     }
 
-
-
-
-
-
+ }
 
     public boolean login() {
         boolean found=false;
@@ -38,7 +44,7 @@ public class DoLogin {
             System.out.print("enter pwd=");
             pwd=sc.next();
 
-            if(search(user,pwd,loginList))
+            if(search(user,pwd,loginlist))
               found=true;
 
             System.out.println("n ai ghicit");
@@ -62,11 +68,11 @@ return found;
             System.out.print("enter pwd=");
             pwd = sc.next();
 
-            if (search(user, pwd, loginList)) {
+            if (search(user, pwd, loginlist)) {
                 found = true;
                 break;
             }
-            System.out.println("n ai ghicit");
+            System.out.println("n-ai ghicit");
 
         }
         while(true);
@@ -77,11 +83,11 @@ return found;
 
     }
 
-    private static boolean search(String u, String p, Login[] l) {
+    private static boolean search(String u, String p, ArrayList<Login> l) {
         boolean found=false;
-        for(int i =0;i<l.length;i++){
-            Login ll = l[i];
-            if(u.equals(ll.getUser()) && p.equals(ll.getPassword())) {
+        for(Login i : l){
+
+            if(u.equals(i.getUser()) && p.equals(i.getPassword())) {
                 found=true;
                 break;
             }

@@ -27,7 +27,7 @@ public class Login {
    // Login() {}
 
     Login(String u, String p) {
-        System.out.println("construcutior");
+        System.out.println("constructor running");
         user=u;
         password=p;
     }
